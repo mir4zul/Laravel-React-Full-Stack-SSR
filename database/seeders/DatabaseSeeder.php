@@ -39,9 +39,20 @@ class DatabaseSeeder extends Seeder
             $upvoteDownvotePermissions,
         ]);
 
+        // Create test users with roles
         User::factory()->create([
-            'name' => 'Test User',
+            'name' => 'User Test User',
             'email' => 'test@example.com',
         ])->assignRole(RolesEnum::User);
+
+        User::factory()->create([
+            'name' => 'Commenter Test User',
+            'email' => 'commenter@example.com',
+        ])->assignRole(RolesEnum::Commenter);
+
+        User::factory()->create([
+            'name' => 'Admin Test User',
+            'email' => 'admin@example.com',
+        ])->assignRole(RolesEnum::Admin);
     }
 }
