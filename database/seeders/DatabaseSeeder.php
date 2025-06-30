@@ -54,5 +54,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin Test User',
             'email' => 'admin@example.com',
         ])->assignRole(RolesEnum::Admin);
+
+        // Create additional users as needed
+        User::factory()->count(10)->create()->each(function ($user) {
+            $user->assignRole(RolesEnum::User);
+        });
     }
 }
