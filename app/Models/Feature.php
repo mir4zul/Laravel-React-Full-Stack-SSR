@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class Feature extends Model
 {
+  use HasFactory;
   protected $table = 'features';
   protected $fillable = [
     'name',
     'description',
-    'status',
     'created_at',
+    'user_id',
     'updated_at'
   ];
   protected $casts = [
@@ -33,9 +36,4 @@ class Feature extends Model
   {
     return $this->belongsTo(User::class);
   }
-  public function getStatusAttribute($value)
-  {
-    return $value === 'open' ? 'Open' : ($value === 'closed' ? 'Closed' : 'In Progress');
-  }
 }
- 

@@ -6,29 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId(\App\Models\Feature::class, 'feature_id')
-                ->constrained('features')
-                ->cascadeOnDelete('cascade');
-            $table->foreignId(\App\Models\User::class, 'user_id')
-                ->constrained('users')
-                ->cascadeOnDelete('cascade');
-            $table->longText('comment', 2000);
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('comments', function (Blueprint $table) {
+      $table->id();
+      $table->string('comment', 2000);
+      $table->foreignId('feature_id')
+        ->constrained('features')
+        ->onDelete('cascade');
+      $table->foreignId('user_id')
+        ->constrained('users')
+        ->onDelete('cascade');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('comments');
-    }
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('comments');
+  }
 };
