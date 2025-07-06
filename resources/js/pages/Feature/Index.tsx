@@ -1,21 +1,6 @@
-type Feature = {
-    id: number;
-    name: string;
-    description: string;
-    user: {
-        id: number;
-        name: string;
-        email: string;
-    };
-    created_at: string;
-    updated_at: string;
-};
+import { Feature, PaginatedData } from '@/types';
 
-interface IndexProps {
-    features: Feature[];
-}
-
-export default function Index({ features }: IndexProps) {
+export default function Index({ features }: { features: PaginatedData<Feature> }) {
     console.log(features);
 
     return <div>Index</div>;
