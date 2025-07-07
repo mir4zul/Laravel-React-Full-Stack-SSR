@@ -1,7 +1,23 @@
-import { Feature, PaginatedData } from '@/types';
+import AppLayout from '@/layouts/app-layout';
+import { Feature, PaginatedData, type BreadcrumbItem } from '@/types';
+import { Head } from '@inertiajs/react';
+import FeatureItem from './FeatureItem';
 
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Features',
+        href: '/features',
+    },
+];
 export default function Index({ features }: { features: PaginatedData<Feature> }) {
-    console.log(features);
-
-    return <div>Index</div>;
+    return (
+        <AppLayout breadcrumbs={breadcrumbs}>
+            <Head title="Features" />
+            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+                {features.data.map((feature) => (
+                    <FeatureItem key={feature.id} feature={feature} />
+                ))}
+            </div>
+        </AppLayout>
+    );
 }
