@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFeatureRequest;
 use App\Http\Resources\FeatureResource;
 use App\Models\Feature;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -26,15 +28,17 @@ class FeatureController extends Controller
    */
   public function create()
   {
-    //
+    return Inertia::render('Feature/Create');
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(StoreFeatureRequest $request)
   {
-    //
+    Feature::create($request->all());
+
+    return redirect()->route('features.index')->with('success', 'Feature created successfully.');
   }
 
   /**
