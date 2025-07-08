@@ -18,8 +18,8 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
             </div>
             <div className="p-4">
                 <p className="font-semibold">{feature.name}</p>
-                <p className="text-sm text-muted-foreground">
-                    {isExpanded ? feature.description : feature.description.substring(0, 200)} {feature.description.length > 200 && '...'}
+                <p className="pt-1 text-sm text-muted-foreground">
+                    {isExpanded ? feature.description : feature.description.substring(0, 350) + '...'}
                 </p>
                 {feature.description.length > 100 && (
                     <button
