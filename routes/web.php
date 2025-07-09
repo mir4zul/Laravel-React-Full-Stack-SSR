@@ -16,6 +16,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   Route::get('features', [FeatureController::class, 'index'])->name('features.index');
   Route::post('features', [FeatureController::class, 'store'])->name('features.store');
+  Route::get('features/{feature}', [FeatureController::class, 'show'])->name('features.show');
+  Route::get('features/{feature}/edit', [FeatureController::class, 'edit'])->name('features.edit');
+  Route::put('features/{feature}', [FeatureController::class, 'update'])->name('features.update');
   Route::delete('features/{feature}', [FeatureController::class, 'destroy'])->name('features.destroy');
 });
 

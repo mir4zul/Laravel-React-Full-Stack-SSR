@@ -9,6 +9,10 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
         setIsExpanded(!isExpanded);
     };
 
+    // Safely handle null/undefined descriptions
+    const description = feature?.description || '';
+    const shouldShowToggle = description.length > 100;
+
     return (
         <div className="my-1 flex overflow-hidden rounded-xl bg-border/50 p-4">
             <div className="flex flex-col gap-2">
@@ -17,11 +21,11 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
                 <ChevronDownIcon />
             </div>
             <div className="p-4">
-                <p className="font-semibold">{feature.name}</p>
+                <p className="font-semibold">{feature?.name}</p>
                 <p className="pt-1 text-sm text-muted-foreground">
-                    {isExpanded ? feature.description : feature.description.substring(0, 350) + '...'}
+                    {isExpanded ? description : `${description.substring(0, 350)} ${description.length > 350 ? '...' : ''}`}
                 </p>
-                {feature.description.length > 100 && (
+                {shouldShowToggle && (
                     <button
                         className="cursor-pointer pt-2 text-sm text-chart-1 underline duration-200 ease-in-out hover:text-chart-2"
                         onClick={toggleReadMore}

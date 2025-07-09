@@ -66,7 +66,7 @@ export type Feature = {
     id?: number;
     name: string;
     description: string;
-    user?: User;
-    created_at?: string;
-    updated_at?: string;
+    user: User;
+    created_at: string;
+    updated_at: string;
 };

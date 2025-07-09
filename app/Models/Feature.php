@@ -11,11 +11,9 @@ class Feature extends Model
   use HasFactory;
   protected $table = 'features';
   protected $fillable = [
+    'user_id',
     'name',
     'description',
-    'created_at',
-    'user_id',
-    'updated_at'
   ];
   protected $casts = [
     'created_at' => 'datetime',

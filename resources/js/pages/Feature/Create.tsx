@@ -4,60 +4,73 @@ import { FormEventHandler } from 'react';
 import InputError from '@/components/input-error';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Feature } from '@/types';
+
+type FeatureFormData = {
+    name: string;
+    description: string;
+};
 
 export default function Create() {
-    const { data, setData, post, processing, errors, reset } = useForm<Required<Feature>>({
+    const { data, setData, post, processing, errors, reset } = useForm<FeatureFormData>({
         name: '',
         description: '',
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('feature.store'), {
+        post(route('features.store'), {
             onFinish: () => reset('name', 'description'),
         });
     };
 
     return (
-        <>
-            <form className="flex flex-col gap-6" onSubmit={submit}>
-                <h1 className="text-center text-2xl">Create Feature</h1>
-                <div className="grid gap-6">
-                    <div className="grid gap-2">
-                        <Label htmlFor="feature">Feature Title</Label>
-                        <Input
-                            id="name"
-                            type="name"
-                            required
-                            autoFocus
-                            tabIndex={1}
-                            autoComplete="name"
-                            value={data.name}
-                            onChange={(e) => setData('name', e.target.value)}
-                            placeholder="Feature..."
-                        />
-                        <InputError message={errors.name} />
-                    </div>
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">Description</Label>
-                        <textarea
-                            id="description"
-                            required
-                            autoFocus
-                            tabIndex={1}
-                            autoComplete="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder="Description..."
-                        />
-                        <InputError message={errors.description} />
-                    </div>
+        <form className="mx-auto flex max-w-xl flex-col gap-6 rounded p-6 shadow" onSubmit={submit}>
+            <h1 className="text-center text-2xl font-semibold">Create Feature</h1>
+            <div className="grid gap-6">
+                {/* Feature Name */}
+                <div className="grid gap-2">
+                    <Label htmlFor="name">Feature Title</Label>
+                    <Input
+                        id="name"
+                        className="focus:ring--500 rounded border border-gray-500 px-3 py-2 focus:border-gray-500 focus:ring-1 focus:outline-none"
+                        type="text"
+                        autoFocus
+                        tabIndex={1}
+                        autoComplete="name"
+                        value={data.name}
+                        onChange={(e) => setData('name', e.target.value)}
+                        placeholder="Feature name..."
+                    />
+                    <InputError message={errors.name} />
                 </div>
-            </form>
 
-            {/* {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>} */}
-        </>
+                {/* Feature Description */}
+                <div className="grid gap-2">
+                    <Label htmlFor="description">Description</Label>
+                    <textarea
+                        id="description"
+                        tabIndex={2}
+                        autoComplete="description"
+                        value={data.description}
+                        onChange={(e) => setData('description', e.target.value)}
+                        placeholder="Feature description..."
+                        className="min-h-[120px] rounded border border-gray-500 px-3 py-2 focus:border-gray-500 focus:ring-1 focus:ring-gray-500 focus:outline-none"
+                    />
+                    <InputError message={errors.description} />
+                </div>
+            </div>
+
+            {/* Submit Button */}
+            <button type="submit" className="w-full rounded bg-gray-600 px-4 py-2 text-white transition hover:bg-gray-700" disabled={processing}>
+                {processing ? 'Submitting...' : 'Submit'}
+            </button>
+
+            {/* Optional Success Message (Uncomment if using flash messages) */}
+            {/* {status && (
+                <div className="text-center text-sm font-medium text-green-600 mt-4">
+                    {status}
+                </div>
+            )} */}
+        </form>
     );
 }
