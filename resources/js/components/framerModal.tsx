@@ -47,7 +47,7 @@ export const FramerModal = ({ isOpen, onClose, children }: FramerModalProps) => 
 
                     {/* Modal content */}
                     <motion.div
-                        className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-800"
+                        className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-secondary"
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -20, opacity: 0 }}

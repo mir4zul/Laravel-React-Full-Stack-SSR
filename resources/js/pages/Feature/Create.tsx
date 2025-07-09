@@ -54,14 +54,18 @@ export default function Create() {
                         value={data.description}
                         onChange={(e) => setData('description', e.target.value)}
                         placeholder="Feature description..."
-                        className="min-h-[120px] rounded border border-gray-500 px-3 py-2 focus:border-gray-500 focus:ring-1 focus:ring-gray-500 focus:outline-none"
+                        className="min-h-[120px] rounded border border-gray-500 px-3 py-2 text-sm focus:border-gray-500 focus:ring-1 focus:ring-gray-500 focus:outline-none"
                     />
                     <InputError message={errors.description} />
                 </div>
             </div>
 
             {/* Submit Button */}
-            <button type="submit" className="w-full rounded bg-gray-600 px-4 py-2 text-white transition hover:bg-gray-700" disabled={processing}>
+            <button
+                type="submit"
+                className="w-full cursor-pointer rounded bg-accent px-4 py-2 text-white transition hover:bg-accent/80"
+                disabled={processing}
+            >
                 {processing ? 'Submitting...' : 'Submit'}
             </button>
 
