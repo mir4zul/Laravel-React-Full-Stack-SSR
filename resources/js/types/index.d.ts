@@ -10,6 +10,11 @@ export interface BreadcrumbItem {
     href: string;
 }
 
+export interface NewButton {
+    name: string;
+    href?: string;
+}
+
 export interface NavGroup {
     title: string;
     items: NavItem[];
@@ -58,10 +63,10 @@ export type PaginatedData<T = any> = {
 };
 
 export type Feature = {
-    id: number;
+    id?: number;
     name: string;
     description: string;
-    user: User;
-    created_at: string;
-    updated_at: string;
+    user?: User;
+    created_at?: string;
+    updated_at?: string;
 };

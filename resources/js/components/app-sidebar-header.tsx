@@ -1,11 +1,12 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import Create from '@/pages/Feature/Create';
-import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
+import { NewButton, type BreadcrumbItem as BreadcrumbItemType } from '@/types';
+import { Link } from 'lucide-react';
 import { useState } from 'react';
 import { FramerModal } from './framerModal';
 
-export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItemType[] }) {
+export function AppSidebarHeader({ breadcrumbs = [], newButton }: { breadcrumbs?: BreadcrumbItemType[]; newButton?: NewButton }) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
@@ -15,12 +16,22 @@ export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: Breadcrum
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
             </div>
 
-            {/* New Button */}
-            <div className="rounded-md bg-sidebar-border/80 px-5 py-2 duration-200 ease-in-out hover:bg-sidebar-border">
-                <button onClick={() => setIsOpen(true)} className="text-sm font-medium">
-                    New Feature
-                </button>
-            </div>
+            {/* New Button or Link */}
+            {newButton && (
+                <div className="rounded-md bg-sidebar-border/80 px-5 py-2 duration-200 ease-in-out hover:bg-sidebar-border">
+                    {!newButton?.href && (
+                        <button onClick={() => setIsOpen(true)} className="text-sm font-medium">
+                            {newButton?.name}
+                        </button>
+                    )}
+
+                    {newButton?.href && (
+                        <Link href={newButton?.href} className="text-sm font-medium">
+                            {newButton?.name}
+                        </Link>
+                    )}
+                </div>
+            )}
 
             {/* Open Modal */}
             <FramerModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
