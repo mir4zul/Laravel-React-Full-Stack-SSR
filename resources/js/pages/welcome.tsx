@@ -1,26 +1,38 @@
-import { motion } from 'framer-motion';
+import { FramerModal } from '@/components/framerModal';
 import { useState } from 'react';
 
 export default function Welcome() {
-    const [modalOpen, setModalOpen] = useState(false);
-
-    const close = () => setModalOpen(false);
-    const open = () => setModalOpen(true);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
-        <>
-            <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
-                <div className="">
-                    <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="save-button"
-                        onClick={() => (modalOpen ? close() : open())}
-                    >
-                        Launch modal
-                    </motion.button>
+        <div className="p-8">
+            <button onClick={() => setIsOpen(true)} className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700">
+                Open Modal
+            </button>
+
+            <FramerModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Modal Title</h2>
+                    <p className="text-gray-600 dark:text-gray-300">
+                        This is a beautiful modal with Framer Motion animations and Tailwind styling. It has a smooth entrance and exit, backdrop
+                        blur, and dark mode support.
+                    </p>
+                    <div className="flex justify-end space-x-3 pt-4">
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="rounded-lg px-4 py-2 text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+                        >
+                            Confirm
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </>
+            </FramerModal>
+        </div>
     );
 }
