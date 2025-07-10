@@ -19,7 +19,7 @@ export default function Index({ features }: { features: PaginatedData<Feature> }
         <AppLayout breadcrumbs={breadcrumbs} newButton={newButton}>
             <Head title="Features" />
 
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+            <div className="relative flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 {features.data.map((feature) => (
                     <FeatureItem key={feature.id} feature={feature} />
                 ))}
