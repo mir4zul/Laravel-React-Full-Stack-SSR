@@ -1,14 +1,16 @@
 import { FramerDropdown } from '@/components/ui/framerDropdown';
 import { Feature } from '@/types';
+import { useForm } from '@inertiajs/react';
 import { ChevronDownIcon, ChevronUpIcon, EllipsisVertical } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export default function FeatureItem({ feature }: { feature: Feature }) {
+    const { delete: destroy, processing } = useForm();
+
     const [isExpanded, setIsExpanded] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
-
     const toggleReadMore = () => setIsExpanded(!isExpanded);
 
     const description = feature?.description || '';
@@ -45,9 +47,13 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
     }, [isDropdownOpen]);
 
     const dropdownItems = [
-        { label: 'Edit', onClick: () => alert('Edit') },
-        { label: 'Make a copy', onClick: () => alert('Copied') },
-        { label: 'Favorite', onClick: () => alert('Favorited') },
+        {
+            label: 'Edit',
+            onClick: () => {
+                window.location.href = `/features/${feature?.id}/show`;
+            },
+        },
+        { label: 'Show', onClick: () => alert('show') },
         { label: 'Delete', onClick: () => {} },
     ];
 
@@ -95,6 +101,7 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
                         <button
                             key={index}
                             onClick={() => {
+                                item.onClick();
                                 setIsDropdownOpen(false);
                             }}
                             className={`w-full cursor-pointer px-4 py-2 text-left text-sm text-gray-200 transition ${
