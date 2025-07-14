@@ -1,7 +1,6 @@
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, Feature } from '@/types';
 import { Head } from '@inertiajs/react';
-
 export default function Show({ feature }: { feature: Feature }) {
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Features', href: '/features' },

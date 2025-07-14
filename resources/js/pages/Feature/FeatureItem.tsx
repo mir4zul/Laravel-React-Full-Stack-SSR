@@ -1,11 +1,14 @@
+import { FramerModal } from '@/components/framerModal';
 import { FramerDropdown } from '@/components/ui/framerDropdown';
 import { Feature } from '@/types';
 import { useForm } from '@inertiajs/react';
 import { ChevronDownIcon, ChevronUpIcon, EllipsisVertical } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import Edit from './Edit';
 
 export default function FeatureItem({ feature }: { feature: Feature }) {
     const { delete: destroy, processing } = useForm();
+    const [modal, setModal] = useState(false);
 
     const [isExpanded, setIsExpanded] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -50,10 +53,15 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
         {
             label: 'Edit',
             onClick: () => {
-                window.location.href = `/features/${feature?.id}/show`;
+                setModal(true);
             },
         },
-        { label: 'Show', onClick: () => alert('show') },
+        {
+            label: 'Show',
+            onClick: () => {
+                window.location.href = `/features/${feature?.id}`;
+            },
+        },
         { label: 'Delete', onClick: () => {} },
     ];
 
@@ -115,6 +123,15 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
                     ))}
                 </FramerDropdown>
             </div>
+
+            {/* Modal for Edit */}
+            {modal && (
+                <FramerModal isOpen={modal} onClose={() => setModal(false)}>
+                    <div className="p-6">
+                        <Edit feature={feature} onClose={() => setModal(false)} />
+                    </div>
+                </FramerModal>
+            )}
         </div>
     );
 }
