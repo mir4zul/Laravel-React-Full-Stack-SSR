@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import Edit from './Edit';
 
 export default function FeatureItem({ feature }: { feature: Feature }) {
-    const { delete: destroy, processing } = useForm();
+    const { delete: destroy } = useForm();
     const [modal, setModal] = useState(false);
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -49,6 +49,7 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
         };
     }, [isDropdownOpen]);
 
+    // Dropdown items
     const dropdownItems = [
         {
             label: 'Edit',
@@ -62,7 +63,12 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
                 window.location.href = `/features/${feature?.id}`;
             },
         },
-        { label: 'Delete', onClick: () => {} },
+        {
+            label: 'Delete',
+            onClick: () => {
+                destroy(route('features.destroy', feature?.id));
+            },
+        },
     ];
 
     // Close on outside click
