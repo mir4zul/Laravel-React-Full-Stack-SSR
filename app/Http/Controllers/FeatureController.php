@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFeatureRequest;
 use App\Http\Resources\FeatureResource;
 use App\Models\Feature;
-use Dotenv\Util\Str;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 

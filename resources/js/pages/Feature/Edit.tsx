@@ -26,7 +26,7 @@ export default function Edit({ feature, onClose }: { feature: Feature; onClose: 
     };
 
     return (
-        <form className="mx-auto flex max-w-xl flex-col gap-6 rounded shadow" onSubmit={submit}>
+        <form className="mx-auto flex max-w-xl flex-col gap-6 rounded p-6 shadow" onSubmit={submit}>
             <h1 className="text-center text-2xl font-semibold">Edit Feature</h1>
             <div className="grid gap-6">
                 {/* Feature Name */}
