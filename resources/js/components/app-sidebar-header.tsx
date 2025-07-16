@@ -5,6 +5,7 @@ import { NewButton, type BreadcrumbItem as BreadcrumbItemType } from '@/types';
 import { Link } from 'lucide-react';
 import { useState } from 'react';
 import { FramerModal } from './framerModal';
+import SuccessMessage from './SuccessMessage';
 
 export function AppSidebarHeader({ breadcrumbs = [], newButton }: { breadcrumbs?: BreadcrumbItemType[]; newButton?: NewButton }) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -15,6 +16,10 @@ export function AppSidebarHeader({ breadcrumbs = [], newButton }: { breadcrumbs?
                 <SidebarTrigger className="-ml-1" />
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
             </div>
+
+            {/* Success Message */}
+            {/* <SuccessMessage message={successMessage} /> */}
+            <SuccessMessage />
 
             {/* New Button or Link */}
             {newButton && (
@@ -35,7 +40,7 @@ export function AppSidebarHeader({ breadcrumbs = [], newButton }: { breadcrumbs?
 
             {/* Open Modal */}
             <FramerModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <Create />
+                <Create onClose={() => setIsOpen(false)} />
             </FramerModal>
         </header>
     );

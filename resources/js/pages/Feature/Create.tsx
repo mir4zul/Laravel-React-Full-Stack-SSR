@@ -10,7 +10,7 @@ type FeatureFormData = {
     description: string;
 };
 
-export default function Create() {
+export default function Create({ onClose }: { onClose: () => void }) {
     const { data, setData, post, processing, errors, reset } = useForm<FeatureFormData>({
         name: '',
         description: '',
@@ -20,11 +20,21 @@ export default function Create() {
         e.preventDefault();
         post(route('features.store'), {
             onFinish: () => reset('name', 'description'),
+            onSuccess: () => {
+                onClose();
+            },
         });
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // Prevent default form submission
+            submit(e as unknown as React.FormEvent); // Call submit function
+        }
+    };
+
     return (
-        <form className="mx-auto flex max-w-xl flex-col gap-6 rounded p-6 shadow" onSubmit={submit}>
+        <form onKeyDown={handleKeyDown} className="mx-auto flex max-w-xl flex-col gap-6 rounded p-6 shadow" onSubmit={submit}>
             <h1 className="text-center text-2xl font-semibold">Create Feature</h1>
             <div className="grid gap-6">
                 {/* Feature Name */}

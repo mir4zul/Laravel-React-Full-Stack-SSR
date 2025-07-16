@@ -53,7 +53,7 @@ class FeatureController extends Controller
   {
     return Inertia::render('Feature/Edit', [
       'feature' => new FeatureResource($feature)
-    ]);
+    ])->with("success", 'Feature updated successfully.');
   }
 
   /**
