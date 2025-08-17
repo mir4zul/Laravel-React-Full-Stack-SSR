@@ -20,6 +20,7 @@ class FeatureResource extends JsonResource
       'name' => $this->name,
       'description' => $this->description,
       'user' => new UserResource($this->user),
+      'upvote_count' => $this->upvote_count,
       'created_at' => $this->created_at->format('Y-m-d, H:i:s'),
       'updated_at' => $this->updated_at->format('Y-m-d, H:i:s'),
     ];

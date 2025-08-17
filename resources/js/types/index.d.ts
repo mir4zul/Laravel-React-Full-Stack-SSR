@@ -67,6 +67,7 @@ export type Feature = {
     name: string;
     description: string;
     user: User;
+    upvote_count?: number;
     created_at: string;
     updated_at: string;
 };

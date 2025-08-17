@@ -18,7 +18,7 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
             {/* Upvote/Downvote */}
             <div className="flex flex-col items-center gap-2">
                 <ChevronUpIcon className="cursor-pointer transition-colors hover:text-blue-500" />
-                <span>12</span>
+                <span>{feature?.upvote_count || 0}</span>
                 <ChevronDownIcon className="cursor-pointer transition-colors hover:text-blue-500" />
             </div>
 
