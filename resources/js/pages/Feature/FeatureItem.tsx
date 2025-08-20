@@ -1,5 +1,6 @@
 import { FramerModal } from '@/components/framerModal';
 import { Feature } from '@/types';
+import clsx from 'clsx';
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 import { useState } from 'react';
 import Edit from './Edit';
@@ -13,13 +14,21 @@ export default function FeatureItem({ feature }: { feature: Feature }) {
     const description = feature?.description || '';
     const shouldShowToggle = description.length > 350;
 
+    console.log('FeatureItem rendered', feature);
+
     return (
         <div className="my-1 flex justify-between overflow-hidden rounded-xl bg-border/50 p-4">
             {/* Upvote/Downvote */}
             <div className="flex flex-col items-center gap-2">
-                <ChevronUpIcon className="cursor-pointer transition-colors hover:text-blue-500" />
-                <span>{feature?.upvote_count}</span>
-                <ChevronDownIcon className="cursor-pointer transition-colors hover:text-blue-500" />
+                <ChevronUpIcon
+                    className={clsx('cursor-pointer transition-colors hover:text-blue-500', feature?.user_has_upvoted && 'text-amber-600')}
+                />
+                <span className={clsx('text-sm', feature?.user_has_upvoted && 'text-amber-600', feature?.user_has_downvoted && 'text-amber-600')}>
+                    {feature?.upvote_count}
+                </span>
+                <ChevronDownIcon
+                    className={clsx('cursor-pointer transition-colors hover:text-blue-500', feature?.user_has_downvoted && 'text-amber-600')}
+                />
             </div>
 
             {/* Content */}

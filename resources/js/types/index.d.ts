@@ -70,4 +70,6 @@ export type Feature = {
     upvote_count?: number;
     created_at: string;
     updated_at: string;
+    user_has_upvoted?: boolean;
+    user_has_downvoted?: boolean;
 };
