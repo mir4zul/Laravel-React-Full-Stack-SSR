@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\UpvoteController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,6 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
   Route::get('features/{feature}/edit', [FeatureController::class, 'edit'])->name('features.edit');
   Route::put('features/{feature}', [FeatureController::class, 'update'])->name('features.update');
   Route::delete('features/{feature}', [FeatureController::class, 'destroy'])->name('features.destroy');
+
+  Route::post('features/{feature}/upvote', [UpvoteController::class, 'store'])->name('upvote.store');
 });
 
 require __DIR__ . '/settings.php';
