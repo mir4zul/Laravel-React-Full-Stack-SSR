@@ -22,4 +22,17 @@ class UpvoteController extends Controller
     ]);
     return redirect()->back();
   }
+  // public function destroy($id)
+  // {
+  //   $upvote = Auth::user()->upvotes()->findOrFail($id);
+  //   $upvote->delete();
+  //   return redirect()->back();
+  // }
+
+  public function destroy(Feature $feature)
+  {
+    $upvote = $feature->upvotes()->where('user_id', Auth::id())->firstOrFail();
+    $upvote->delete();
+    return redirect()->back();
+  }
 }

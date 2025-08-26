@@ -21,7 +21,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
   Route::put('features/{feature}', [FeatureController::class, 'update'])->name('features.update');
   Route::delete('features/{feature}', [FeatureController::class, 'destroy'])->name('features.destroy');
 
+  // Upvote routes
   Route::post('features/{feature}/upvote', [UpvoteController::class, 'store'])->name('upvote.store');
+  Route::delete('/upvote/{feature}', [UpvoteController::class, 'destroy'])->name('upvote.destroy');
+
+  Route::post('features/{feature}/downvote', [DownvoteController::class, 'store'])->name('downvote.store');
+  Route::delete('features/{feature}/downvote', [DownvoteController::class, 'destroy'])->name('downvote.destroy');
 });
 
 require __DIR__ . '/settings.php';
